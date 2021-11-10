@@ -1,6 +1,6 @@
+require("dotenv").config();
 const cors = require("cors");
 const debug = require("debug")("robots:server");
-
 const express = require("express");
 const morgan = require("morgan");
 

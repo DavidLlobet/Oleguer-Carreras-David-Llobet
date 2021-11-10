@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 const debug = require("debug")("series:database");
-const { mongoose } = require("mongoose")
+const mongoose = require("mongoose");
 
 
 const connectDB = (connectionString) => 
@@ -28,4 +28,4 @@ new Promise((resolve, reject) => {
     });
     });
 
-    module.exports = connectDB;
+    module.exports = {connectDB};

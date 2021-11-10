@@ -36,15 +36,11 @@ const initializeServer = (port) =>
     app.use(cors());
     app.use(express.json());
 
-
-    app.use(notFoundErrorHandler);
-    app.use(generalErrorHandler);
-
     app.use("/users",usersRoutes);
     app.use("/series",seriesRoutes);    
     app.use("/platforms",platformsRoutes)
 
-
-
+    app.use(notFoundErrorHandler);
+    app.use(generalErrorHandler);
 
     module.exports = { app, initializeServer };

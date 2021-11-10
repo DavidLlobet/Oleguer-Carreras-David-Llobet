@@ -6,7 +6,7 @@ const router = express.Router()
 router.get("/", getPlatforms);
 router.post("/", addPlatform);
 router.put("/:idPlatform", updatePlatform);
-router.delete("/:idPlatform", deletePlatform)
+router.delete("/:idPlatform", deletePlatform);
 
 
 

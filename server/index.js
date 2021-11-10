@@ -3,9 +3,14 @@ const cors = require("cors");
 const debug = require("debug")("series:server");
 const express = require("express");
 const morgan = require("morgan");
+
+const { notFoundErrorHandler, generalErrorHandler } = require("./error");
+
+
 const platformsRoutes = require("./routes/platformsRoutes");
 const seriesRoutes = require("./routes/seriesRoutes");
 const usersRoutes = require("./routes/usersRoutes");
+
 
 const app = express();
 
@@ -31,9 +36,14 @@ const initializeServer = (port) =>
     app.use(cors());
     app.use(express.json());
 
+
+    app.use(notFoundErrorHandler);
+    app.use(generalErrorHandler);
+
     app.use("/users",usersRoutes);
     app.use("/series",seriesRoutes);    
     app.use("/platforms",platformsRoutes)
+
 
 
 

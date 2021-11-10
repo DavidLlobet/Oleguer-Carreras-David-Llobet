@@ -3,6 +3,7 @@ const cors = require("cors");
 const debug = require("debug")("series:server");
 const express = require("express");
 const morgan = require("morgan");
+const { notFoundErrorHandler, generalErrorHandler } = require("./error");
 
 
 const app = express();
@@ -28,5 +29,8 @@ const initializeServer = (port) =>
     app.use(morgan("dev"));
     app.use(cors());
     app.use(express.json());
+
+    app.use(notFoundErrorHandler);
+    app.use(generalErrorHandler);
 
     module.exports = { app, initializeServer };

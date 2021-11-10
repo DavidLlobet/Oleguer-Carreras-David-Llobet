@@ -9,10 +9,10 @@ module.exports = {
     'airbnb-base', 'prettier',
   ],
   parserOptions: {
-    ecmaVersion: 13,
+    ecmaVersion: 12,
   },
   rules: {
-     "no-param-reassign": "off",
+    "no-param-reassign": "off",
     "no-plusplus": "off",
     "no-restricted-syntax": "off",
     "consistent-return": "off",

@@ -1,5 +1,5 @@
 const Platform = require('../../database/models/platform');
-const { getPlatforms, addPlatform } = require('./platformsController');
+const { getPlatforms, addPlatform, updatePlatform } = require('./platformsController');
 
 jest.mock('../../database/models/platform');
 

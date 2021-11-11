@@ -88,3 +88,26 @@ describe('Given a /series/ route', () => {
     });
   });
 });
+
+describe('Given a /series/:idSerie route', () => {
+  describe('When it receives a delete request with a serie id', () => {
+    test('Then it should respond with the deleted serie', async () => {
+      const response = await request.delete(`/series/${newSerie1.id}`).expect(200);
+      expect(response.body).toHaveProperty('name', newSerie1.name);
+    });
+  });
+  describe('When it receives a delete request with no serie id', () => {
+    test('Then it should respond with an error', async () => {
+      const response = await request.delete('/series/hola').expect(400);
+
+      expect(response.body).toHaveProperty('error', 'Cannot delete the serie');
+    });
+  });
+  describe('When it receives a delete request with a wrong serie id', () => {
+    test('Then it should respond with an error', async () => {
+      const response = await request.delete('/series/618d661e120687524fd0ab11').expect(404);
+
+      expect(response.body).toHaveProperty('error', 'Serie to delete not found');
+    });
+  });
+});

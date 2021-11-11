@@ -67,3 +67,24 @@ describe('Given a /series/viewed route', () => {
     });
   });
 });
+
+describe('Given a /series/ route', () => {
+  describe('When it receives a post request with a new serie', () => {
+    test('Then it should response with the created serie', async () => {
+      const newSerie = {
+        name: 'The Sopranos',
+        isWatched: true,
+        platformId: '618c2bde9712904c2b990e99',
+      };
+      const response = await request.post('/series/').send(newSerie).expect(200);
+      expect(response.body).toHaveProperty('name', newSerie.name);
+    });
+  });
+  describe('When it receives a post request with no serie', () => {
+    test('Then it should response with an error', async () => {
+      const response = await request.post('/series/').expect(400);
+
+      expect(response.body).toHaveProperty('error', 'Cannot add the serie');
+    });
+  });
+});

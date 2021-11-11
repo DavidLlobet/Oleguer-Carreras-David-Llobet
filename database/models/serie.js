@@ -1,4 +1,4 @@
-const { Schema, model, Types } = require("mongoose");
+const { Schema, model, Types } = require('mongoose');
 
 const serieSchema = new Schema({
   name: {
@@ -11,11 +11,14 @@ const serieSchema = new Schema({
   },
   platformId: {
     type: Types.ObjectId,
-    ref: "Platform",
-    required:true 
+    ref: 'Platform',
+    required: true,
+  },
+  fileUrl: {
+    type: String,
   },
 });
 
-const Serie = model("Serie", serieSchema);
+const Serie = model('Serie', serieSchema);
 
 module.exports = Serie;

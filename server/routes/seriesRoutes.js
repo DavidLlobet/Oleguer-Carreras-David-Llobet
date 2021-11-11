@@ -45,7 +45,9 @@ router.post('/new', upload.single('picture'), async (req, res, next) => {
   await bucket.upload(req.file.path);
   await bucket.file(req.file.filename).makePublic();
   const fileURL = bucket.file(req.file.filename).publicUrl();
+  req.body.fileUrl = fileURL;
   console.log(fileURL);
+  console.log(req.body);
   next();
 }, createSerie);
 router.put('/:idSerie', modifySerie);

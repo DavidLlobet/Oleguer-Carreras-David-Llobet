@@ -30,7 +30,7 @@ beforeEach(async () => {
   });
   newSerie2 = await Serie.create({
     name: 'Breaking Good',
-    isWatched: true,
+    isWatched: false,
     platformId: '618c2bde9712904c2b990e96',
   });
 });
@@ -55,4 +55,15 @@ describe('Given a /series route', () => {
   //     const response = await request.get('/series/').expect(400);
   //   });
   // });
+});
+
+describe('Given a /series/viewed route', () => {
+  describe('When it receives a get request', () => {
+    test('Then it should response with a list of viewed series', async () => {
+      const response = await request.get('/series/viewed/').expect(200);
+
+      expect(response.body[0]).toHaveProperty('name', newSerie1.name);
+      expect(response.body).toHaveLength(1);
+    });
+  });
 });

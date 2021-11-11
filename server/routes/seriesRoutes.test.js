@@ -111,3 +111,38 @@ describe('Given a /series/:idSerie route', () => {
     });
   });
 });
+
+describe('Given a /series/:idSerie route', () => {
+  describe('When it receives a put request', () => {
+    test('Then it should respond with a modified serie', async () => {
+      const modifiedSerie = {
+        name: 'Breaking Good',
+        isWatched: true,
+        platformId: '618c2bde9712904c2b990e99',
+      };
+
+      const response = await request.put(`/series/${newSerie1.id}`).send(modifiedSerie).expect(200);
+
+      expect(response.body.name).toBe(modifiedSerie.name);
+    });
+  });
+  describe('When it receives a put request with a wrong serie id', () => {
+    test('Then it should respond with an error', async () => {
+      const modifiedSerie = {
+        name: 'Breaking Good',
+        isWatched: true,
+        platformId: '618c2bde9712904c2b990e99',
+      };
+      const response = await request.put('/series/618d661e120687524fd0ab11').send(modifiedSerie).expect(404);
+
+      expect(response.body).toHaveProperty('error', 'Serie to modify not found');
+    });
+  });
+  describe('When it receives a put request with no serie id', () => {
+    test('Then it should respond with an error', async () => {
+      const response = await request.put('/series/618d661e120687524fd0ab11h').expect(400);
+
+      expect(response.body).toHaveProperty('error', 'Cannot modify the serie');
+    });
+  });
+});

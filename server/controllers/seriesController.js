@@ -51,7 +51,13 @@ const modifySerie = async (req, res, next) => {
     const serieModified = await Serie.findByIdAndUpdate(idSerie, req.body, {
       new: true,
     });
-    res.json(serieModified);
+    if (serieModified) {
+      res.json(serieModified);
+    } else {
+      const error = new Error('Serie to modify not found');
+      error.code = 404;
+      next(error);
+    }
   } catch (error) {
     error.code = 400;
     error.message = 'Cannot modify the serie';
